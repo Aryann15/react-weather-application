@@ -1,16 +1,16 @@
-import React, { useCallback } from 'react';
-import { useState, useEffect } from 'react';
+import React, { useCallback } from "react";
+import { useState, useEffect } from "react";
 
-import Weather from './components/Weather';
-import LoadingIndicator from './UI/LoadingIndicator';
+import Weather from "./components/Weather";
+import LoadingIndicator from "./UI/LoadingIndicator";
 
-import './app.css';
+import "./app.css";
 
 function App() {
   const [data, setData] = useState(null);
   const [place, setPlace] = useState(null);
-  const [search, setSearch] = useState('');
-  const [location, setLocation] = useState('');
+  const [search, setSearch] = useState("");
+  const [location, setLocation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   function handleSearch(e) {
@@ -18,7 +18,7 @@ function App() {
   }
 
   async function geoHandler() {
-    setSearch('');
+    setSearch("");
     setIsLoading(true);
     await navigator.geolocation.getCurrentPosition((position) => {
       const crd = position.coords;
@@ -30,10 +30,10 @@ function App() {
 
   const fetchData = useCallback(async (search, location) => {
     const options = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-RapidAPI-Key': '0173291af0msh62b3ca25953f210p13d732jsn66b4d9f97708',
-        'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
+        "X-RapidAPI-Key": "0173291af0msh62b3ca25953f210p13d732jsn66b4d9f97708",
+        "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
       },
     };
     const url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${
@@ -81,7 +81,17 @@ function App() {
         {isLoading && <LoadingIndicator />}
         {display}
       </div>
-      <span className="credit">Ranvir@zetabug/github</span>
+      <div className="footer">
+        <p className="credit">
+          <h3>Ranvir@zetabug/github</h3>
+          <img
+            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            alt="GitHub Logo"
+            width="20"
+            height="20"
+          />
+        </p>
+      </div>
     </>
   );
 }
